@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Stuck in the Opus 4.7 hackathon? Here's what I'd tell you if we hopped on a call. · By Tolani Omitokun</title>
+<meta name="description" content="A mentor's guide for builders stuck in the Built with Opus 4.7 hackathon. Written by Community Mentor Tolani Omitokun." />
+<meta property="og:title" content="Stuck in the Opus 4.7 hackathon? Here's what I'd tell you if we hopped on a call." />
+<meta property="og:description" content="A mentor's guide for builders stuck in the Built with Opus 4.7 hackathon." />
+<meta property="og:type" content="article" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper: #F5F0E6;
+    --paper-deep: #EDE5D3;
+    --ink: #1A1612;
+    --ink-soft: #4A403A;
+    --muted: #8B7E6F;
+    --border: #E5DDC9;
+    --ember: #D97740;
+    --crimson: #A62626;
+    --gold: #C9A24C;
+    --code-bg: #1F1A16;
+    --code-fg: #F5EFE2;
+    --max-content: 680px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    scroll-behavior: smooth;
+    background: var(--paper);
+  }
+
+  body {
+    font-family: "Fraunces", Georgia, serif;
+    font-variation-settings: "opsz" 14, "SOFT" 30;
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--ink);
+    background: var(--paper);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* Subtle paper grain */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.35;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.05 0 0 0 0.15 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Scroll progress bar */
+  .progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--crimson), var(--ember), var(--gold));
+    width: 0%;
+    z-index: 100;
+    transition: width 0.15s ease-out;
+  }
+
+  /* Top nav */
+  nav.top {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(245, 240, 230, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 14px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-brand {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-brand em {
+    color: var(--ember);
+    font-style: italic;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 22px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .nav-links a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover {
+    color: var(--crimson);
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    padding: 120px 32px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-family: "Fraunces", serif;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: "";
+    width: 40px;
+    height: 1px;
+    background: var(--ember);
+    display: inline-block;
+  }
+
+  .hero h1 {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(42px, 7vw, 88px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    max-width: 900px;
+    margin-bottom: 40px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--crimson);
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: center;
+    font-size: 15px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    max-width: 700px;
+  }
+
+  .hero-meta strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .hero-meta .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--muted);
+    display: inline-block;
+  }
+
+  /* Lede paragraph */
+  .lede {
+    max-width: var(--max-content);
+    margin: 40px auto 0;
+    padding: 0 32px;
+    font-size: 22px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    font-weight: 300;
+    position: relative;
+    z-index: 2;
+  }
+
+  .lede em {
+    font-style: italic;
+    color: var(--crimson);
+  }
+
+  /* Article body */
+  article {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    padding: 60px 32px 120px;
+    position: relative;
+    z-index: 2;
+  }
+
+  article h2 {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(32px, 4.5vw, 46px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-top: 80px;
+    margin-bottom: 28px;
+    color: var(--ink);
+    scroll-margin-top: 80px;
+  }
+
+  article h2:first-child {
+    margin-top: 0;
+  }
+
+  article h2 em {
+    font-style: italic;
+    color: var(--crimson);
+  }
+
+  article h3 {
+    font-family: "Fraunces", serif;
+    font-variation-settings: "opsz" 30, "SOFT" 20;
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+
+  article p {
+    margin-bottom: 20px;
+    font-size: 18px;
+    line-height: 1.75;
+    color: var(--ink);
+  }
+
+  article p strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  article a {
+    color: var(--crimson);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(166, 38, 38, 0.3);
+    transition: border-color 0.2s;
+  }
+
+  article a:hover {
+    border-bottom-color: var(--crimson);
+  }
+
+  article ul, article ol {
+    margin: 0 0 24px 0;
+    padding-left: 28px;
+  }
+
+  article li {
+    margin-bottom: 10px;
+    line-height: 1.7;
+  }
+
+  article ul li::marker {
+    color: var(--ember);
+  }
+
+  article ol li::marker {
+    color: var(--ember);
+    font-family: "Instrument Serif", serif;
+    font-weight: 500;
+  }
+
+  article li strong {
+    font-weight: 600;
+  }
+
+  /* Pull quote */
+  .pullquote {
+    font-family: "Instrument Serif", serif;
+    font-style: italic;
+    font-size: clamp(24px, 3.5vw, 32px);
+    line-height: 1.3;
+    color: var(--ink);
+    border-left: 3px solid var(--ember);
+    padding: 12px 0 12px 28px;
+    margin: 40px 0;
+  }
+
+  .pullquote strong {
+    font-weight: 400;
+    color: var(--crimson);
+  }
+
+  /* Table */
+  .rubric {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 28px 0 32px;
+    font-size: 15px;
+  }
+
+  .rubric th {
+    text-align: left;
+    font-family: "Fraunces", serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 12px;
+    color: var(--muted);
+    padding: 12px 16px 12px 0;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .rubric td {
+    padding: 16px 16px 16px 0;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .rubric td:first-child {
+    font-weight: 600;
+    color: var(--ink);
+    white-space: nowrap;
+    padding-right: 20px;
+  }
+
+  .rubric td:nth-child(2) {
+    font-family: "Instrument Serif", serif;
+    font-style: italic;
+    color: var(--ember);
+    font-size: 18px;
+    padding-right: 20px;
+    white-space: nowrap;
+  }
+
+  .rubric td:last-child {
+    color: var(--ink-soft);
+  }
+
+  /* Code */
+  code {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.88em;
+    background: var(--paper-deep);
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--crimson);
+    border: 1px solid var(--border);
+  }
+
+  pre {
+    background: var(--code-bg);
+    color: var(--code-fg);
+    padding: 28px 24px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 28px 0;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    box-shadow: 0 8px 24px -12px rgba(26, 22, 18, 0.3);
+    position: relative;
+  }
+
+  pre code {
+    background: transparent;
+    padding: 0;
+    border: none;
+    color: var(--code-fg);
+    font-size: 13px;
+  }
+
+  pre::before {
+    content: "prompt";
+    position: absolute;
+    top: 10px;
+    right: 16px;
+    font-family: "Fraunces", serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ember);
+    opacity: 0.7;
+  }
+
+  /* Callout */
+  .callout {
+    background: var(--paper-deep);
+    border-left: 4px solid var(--crimson);
+    padding: 24px 28px;
+    margin: 32px 0;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .callout-label {
+    font-family: "Fraunces", serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--crimson);
+    margin-bottom: 8px;
+  }
+
+  .callout p {
+    margin: 0;
+    font-size: 17px;
+  }
+
+  /* Rule divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 60px 0;
+    color: var(--muted);
+  }
+
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .divider span {
+    font-family: "Instrument Serif", serif;
+    font-style: italic;
+    font-size: 18px;
+  }
+
+  /* Hard rules list */
+  .hard-rules {
+    counter-reset: rule;
+    list-style: none;
+    padding: 0;
+    margin: 28px 0;
+  }
+
+  .hard-rules li {
+    counter-increment: rule;
+    position: relative;
+    padding: 20px 24px 20px 72px;
+    margin-bottom: 12px;
+    background: var(--paper-deep);
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    font-size: 16px;
+  }
+
+  .hard-rules li::before {
+    content: counter(rule, decimal-leading-zero);
+    position: absolute;
+    left: 20px;
+    top: 18px;
+    font-family: "Instrument Serif", serif;
+    font-size: 28px;
+    font-style: italic;
+    color: var(--ember);
+    line-height: 1;
+  }
+
+  .hard-rules li strong {
+    color: var(--crimson);
+    font-weight: 600;
+  }
+
+  /* Tool list */
+  .tools {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 32px;
+  }
+
+  .tools li {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: minmax(140px, auto) 1fr;
+    gap: 20px;
+    align-items: baseline;
+  }
+
+  .tools li:last-child {
+    border-bottom: none;
+  }
+
+  .tools strong {
+    font-family: "Instrument Serif", serif;
+    font-size: 20px;
+    color: var(--ink);
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  /* Arc steps */
+  .arc {
+    counter-reset: step;
+    list-style: none;
+    padding: 0;
+    margin: 28px 0;
+  }
+
+  .arc li {
+    counter-increment: step;
+    position: relative;
+    padding: 20px 0 20px 80px;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .arc li:last-child {
+    border-bottom: none;
+  }
+
+  .arc li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 18px;
+    width: 56px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ember);
+    letter-spacing: 0.05em;
+  }
+
+  .arc li strong {
+    font-family: "Instrument Serif", serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--crimson);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .arc-time {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  /* Dates block */
+  .dates {
+    background: var(--paper-deep);
+    border-radius: 6px;
+    padding: 28px 32px;
+    margin: 28px 0;
+    border: 1px solid var(--border);
+  }
+
+  .dates dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px 28px;
+    margin: 0;
+  }
+
+  .dates dt {
+    font-family: "Fraunces", serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    align-self: center;
+  }
+
+  .dates dd {
+    font-family: "Instrument Serif", serif;
+    font-size: 20px;
+    color: var(--ink);
+    font-style: italic;
+    margin: 0;
+  }
+
+  /* Final closing */
+  .closing {
+    margin-top: 80px;
+    padding-top: 40px;
+    border-top: 2px solid var(--ink);
+    text-align: left;
+  }
+
+  .closing p {
+    font-family: "Instrument Serif", serif;
+    font-style: italic;
+    font-size: 28px;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+
+  .closing p em {
+    color: var(--crimson);
+  }
+
+  /* Signature */
+  .signature {
+    margin-top: 80px;
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .sig-label {
+    font-family: "Fraunces", serif;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .sig-name {
+    font-family: "Instrument Serif", serif;
+    font-size: 36px;
+    font-style: italic;
+    color: var(--crimson);
+    margin-bottom: 10px;
+    line-height: 1;
+  }
+
+  .sig-role {
+    font-size: 15px;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+  }
+
+  .sig-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    font-size: 14px;
+    color: var(--muted);
+    font-family: "JetBrains Mono", monospace;
+    letter-spacing: 0.02em;
+  }
+
+  .sig-links .ch {
+    color: var(--ember);
+  }
+
+  /* Footer */
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 50px 32px 40px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  footer p {
+    font-family: "Fraunces", serif;
+    font-size: 14px;
+    color: var(--paper-deep);
+    opacity: 0.7;
+    margin-bottom: 8px;
+  }
+
+  footer a {
+    color: var(--ember);
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .nav-inner { padding: 12px 20px; }
+    .nav-links { gap: 14px; font-size: 13px; }
+    .hero { padding: 60px 20px 40px; }
+    .lede { padding: 0 20px; font-size: 19px; }
+    article { padding: 40px 20px 80px; }
+    .dates dl { grid-template-columns: 1fr; gap: 4px 0; }
+    .dates dt { margin-top: 14px; }
+    .tools li { grid-template-columns: 1fr; gap: 4px; }
+    pre { font-size: 12px; padding: 20px 16px; }
+    .hard-rules li { padding-left: 60px; }
+    .arc li { padding-left: 0; padding-top: 46px; }
+    .arc li::before { top: 20px; }
+  }
+
+  /* Selection */
+  ::selection {
+    background: var(--ember);
+    color: var(--paper);
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<nav class="top">
+  <div class="nav-inner">
+    <a href="#top" class="nav-brand">A Mentor's <em>Note</em></a>
+    <div class="nav-links">
+      <a href="#problem">Problem</a>
+      <a href="#claude">Prompt</a>
+      <a href="#demo">Demo</a>
+      <a href="#unblock">Unblock</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-eyebrow">Built with Opus 4.7 · A Community Mentor's Note</div>
+  <h1>Stuck? Here's what I'd tell you if we <em>hopped on a call</em>.</h1>
+  <div class="hero-meta">
+    <span><strong>By Tolani Omitokun</strong></span>
+    <span class="dot"></span>
+    <span>Community Mentor</span>
+    <span class="dot"></span>
+    <span>April 22, 2026</span>
+  </div>
+</section>
+
+<p class="lede">
+  Had a mentor call today with a builder who felt <em>completely clueless</em>. He'd shipped his MVP already, looked at it, and realized: this isn't actually solving anything. He could have quit. Instead we spent 20 minutes re-framing, and by the end he said "suddenly I don't feel clueless again." Writing this down so the next 10 people who hit the same wall can get there faster.
+</p>
+
+<article>
+
+  <h2>First thing: you're not alone</h2>
+  <p>Every single builder in this hackathon is going to hit the wall where they look at their project and go, "wait, is this actually solving anything?" That wall is part of the process. If you're there right now, you're exactly where you're supposed to be.</p>
+
+  <h2 id="problem">Second thing: you probably don't need a new idea. You need a <em>sharper problem</em>.</h2>
+  <p>Before you pivot, rebuild, or panic, answer this one question.</p>
+
+  <div class="pullquote">
+    What problem are you solving that someone can't already solve by <strong>opening Claude and typing their question?</strong>
+  </div>
+
+  <p>If the honest answer is "nothing," you don't need to throw your project away. You need to go deeper on the problem.</p>
+
+  <p>"A fitness app" is not a problem worth solving. "I'm a new mom with 20 minutes between nap cycles, I haven't moved my body in 18 months, and every fitness app assumes I have 45 minutes and a full gym" is a problem worth solving. Same category. Totally different build.</p>
+
+  <h2>Build from what only <em>YOU</em> know</h2>
+  <p>The winners of the last Opus hackathon were not the people with the cleverest tech. They were the people who built for a problem they actually live inside.</p>
+
+  <p><strong>CrossBeam</strong> tackled California's ADU permit crisis. 429,000+ permits issued since 2018, 90%+ sent back for corrections, each cycle costing weeks and thousands of dollars. Mike's build lets you upload your corrections letter and construction plans. It reads blueprints with vision, interprets every correction with code citations, cross-references state and city law via live web research, and drafts a response package ready for an engineer to sign. Built on the Claude Agent SDK with 13 custom skills running concurrently.</p>
+
+  <p><strong>TARA</strong> came out of Uganda. Kye built a transport appraisal system because Uganda spends over $1B a year on roads with only $20M on planning, and the process is still done manually by specialists. TARA analyzes dashcam footage frame-by-frame, segments the road, selects interventions with Uganda-calibrated costs, runs full cost-benefit analysis (NPV, EIRR, BCR, sensitivity, deterioration modeling), and has an equity module that identifies pedestrians without footpaths and school children on the carriageway. It shifted appraisal from pure economics to human-centered analysis.</p>
+
+  <div class="callout">
+    <div class="callout-label">The Bar</div>
+    <p>Neither of those is a chatbot. Both solve problems the builders live with. <strong>That's the bar.</strong></p>
+  </div>
+
+  <p>So ask yourself: what do you know that nobody else in this Discord knows?</p>
+
+  <ul>
+    <li>The actual workflow a friend or family member does by hand every week</li>
+    <li>The weird regional thing about your country or city that national platforms don't handle</li>
+    <li>The industry jargon, shortcut, or constraint that only insiders know</li>
+    <li>The job you used to do before this one</li>
+    <li>The thing that makes your family roll their eyes because "everyone just deals with it"</li>
+  </ul>
+
+  <p>Domain expertise beats credentials. Start there.</p>
+
+  <h2 id="claude">Use Claude to <em>think</em>, not to pitch</h2>
+  <p>Most people open Claude and ask, "give me a hackathon idea." That's how you get a generic idea. And a generic idea will not win this hackathon.</p>
+
+  <p>Treat Claude like a strategy partner, not a search engine. The clarity comes from the conversation, not the first reply.</p>
+
+  <p>Here's a prompt template you can copy into a fresh chat:</p>
+
+<pre><code>ROLE: You're my hackathon strategy partner, not an idea generator.
+Challenge my framing before you answer.
+
+CONTEXT:
+- Built with Opus 4.7 Hackathon (April 21 to 28, 2026)
+- Judging: Impact 30%, Opus 4.7 Use 25%, Demo 25%, Depth & Execution 20%
+- Rules: open source, new work only, max team of 2
+- Main model must be Opus 4.7
+
+ABOUT ME:
+- Background: [your career, skills, industry]
+- Location and community: [where you live, who's around you]
+- Lived experience: [what you've personally struggled with]
+
+PROBLEMS I SEE (unfiltered, don't polish):
+1. [Small daily problem from your life]
+2. [Problem your family runs into]
+3. [Workflow you've watched someone struggle with]
+4. [Community-level problem]
+5. [Industry-specific problem only insiders know]
+
+OPUS 4.7 CAPABILITIES I WANT TO LEAN ON:
+[Pick 2-3: 1M context window, self-verification, high-resolution vision,
+xhigh effort, task budgets, file-system memory, Managed Agents, Agent SDK, Skills]
+
+TASKS:
+1. Which problem has the strongest Impact potential and why?
+2. Which problem is most uniquely suited to Opus 4.7 (something that
+   wouldn't have been possible with older models) and why?
+3. Which one could ONLY I build, given my background?
+4. If 1, 2, and 3 point to different problems, help me find the overlap
+   or pick the strongest single bet.
+
+Do not give me a polished idea. Ask me clarifying questions first.</code></pre>
+
+  <p>Now iterate. Push back on the first answer. "What if I merged 3 and 5?" "What would this look like if only I could build it?" "What's the version of this that wasn't possible with a 2024 model?"</p>
+
+  <p>The goal is a sharpened problem, not a pitch deck.</p>
+
+  <h2>What the judges <em>actually</em> reward</h2>
+  <p>Read the rubric like it's a prompt. It tells you what to build for.</p>
+
+  <table class="rubric">
+    <thead>
+      <tr>
+        <th>Criteria</th>
+        <th>Weight</th>
+        <th>What it's really asking</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Impact</td>
+        <td>30%</td>
+        <td>Is there a real, identifiable person whose life gets better?</td>
+      </tr>
+      <tr>
+        <td>Opus 4.7 Use</td>
+        <td>25%</td>
+        <td>Did you do something that wouldn't have been possible with the older model?</td>
+      </tr>
+      <tr>
+        <td>Demo</td>
+        <td>25%</td>
+        <td>Does it hit in 3 minutes? Is it cool to <em>watch</em>, not read?</td>
+      </tr>
+      <tr>
+        <td>Depth &amp; Execution</td>
+        <td>20%</td>
+        <td>Does it feel crafted, not hacked together the night before?</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Translate that into your build priorities:</p>
+
+  <ul>
+    <li><strong>Impact:</strong> name the specific person you're building for. Not "users." One actual person.</li>
+    <li><strong>Opus 4.7 Use:</strong> lean into what's new. 1M context window. Self-verification. High-resolution vision. <code>xhigh</code> effort level. Task budgets. File-system memory. Claude Managed Agents if you got in. If none of those are load-bearing for your project, you're leaving points on the table.</li>
+    <li><strong>Demo:</strong> the best projects here are easier to demo than to explain. If your opener is "let me explain what I built," rework it. The opener should be "watch what happens when I..."</li>
+    <li><strong>Depth:</strong> your first idea is not your final idea. Push past it.</li>
+  </ul>
+
+  <p>If you score high on three and zero on one, you lose. Balance.</p>
+
+  <h2 id="demo">The demo is <em>storytelling</em>, not a feature tour</h2>
+  <p>Three minutes is nothing. You can't walk through everything, so don't. The judges don't care about your tech stack. They care about whether they <em>feel</em> something when they watch.</p>
+
+  <h3>The 3-minute arc that works</h3>
+
+  <ol class="arc">
+    <li>
+      <span class="arc-time">0:00 — 0:20</span>
+      <strong>The person.</strong>
+      Open with who. Not "introducing our AI-powered platform." Try: "My cousin spends every Sunday doing X by hand. Here's what that looks like." One specific human. One specific pain.
+    </li>
+    <li>
+      <span class="arc-time">0:20 — 0:50</span>
+      <strong>The pain.</strong>
+      Show the before. A screen recording of the painful process. A screenshot of a 40-tab spreadsheet. A clip of someone sighing. Make them feel the weight.
+    </li>
+    <li>
+      <span class="arc-time">0:50 — 2:20</span>
+      <strong>The magic.</strong>
+      Now show your tool. But not every feature. Pick the <em>one moment</em> that would surprise the judges. The "wait, it did THAT?" moment. Let it breathe. Don't rush the reveal.
+    </li>
+    <li>
+      <span class="arc-time">2:20 — 2:50</span>
+      <strong>Why Opus 4.7.</strong>
+      Call out the capability that made this possible. "This blueprint analysis ran in 90 seconds because of Opus 4.7's high-resolution vision and 1M context window." Specific. Concrete.
+    </li>
+    <li>
+      <span class="arc-time">2:50 — 3:00</span>
+      <strong>The vision.</strong>
+      One sentence. What does the world look like if this wins?
+    </li>
+  </ol>
+
+  <h3>Tools that won't eat your day</h3>
+
+  <ul class="tools">
+    <li><strong>Descript</strong><span>Text-based video editing. Auto-removes "ums." Great for narrated walkthroughs.</span></li>
+    <li><strong>CapCut</strong><span>Free, fast, works on mobile or desktop, huge template library.</span></li>
+    <li><strong>Loom</strong><span>Fastest for record and trim. Good for scrappy demos.</span></li>
+    <li><strong>ScreenStudio</strong><span>(Mac) Beautiful auto-zoom on clicks. Looks polished with zero effort.</span></li>
+    <li><strong>OBS</strong><span>Full control if you already know your way around it.</span></li>
+    <li><strong>QuickTime + iMovie</strong><span>Works fine on Mac with zero installs.</span></li>
+  </ul>
+
+  <div class="callout">
+    <div class="callout-label">Two Quick Tips</div>
+    <p><strong>Record your voiceover separately</strong> from your screen capture. Your nerves will show up in a single take. Read the script, record each section, stitch it together. And <strong>watch your own demo muted.</strong> If it's not visually compelling with no sound, rewrite the script or rework the screen flow.</p>
+  </div>
+
+  <h2>The 4 hard rules <em>(break any, you're out)</em></h2>
+
+  <ol class="hard-rules">
+    <li><strong>Open source.</strong> Backend, frontend, models, everything in the demo. Approved OSS license.</li>
+    <li><strong>New work only.</strong> Started from scratch during the hackathon. No previous repos.</li>
+    <li><strong>Team size max 2.</strong></li>
+    <li><strong>No banned content.</strong> Nothing illegal, unethical, or using assets you don't have rights to.</li>
+  </ol>
+
+  <p>Re-read these before you submit.</p>
+
+  <h2>Quick technical guardrails</h2>
+
+  <ul>
+    <li><strong>Main model must be Opus 4.7.</strong> You can use Sonnet 4.6 or Haiku 4.5 for sub-tasks where they make sense, but the hero model is 4.7.</li>
+    <li><strong>API credits burn fast on <code>xhigh</code>.</strong> Use it for the hard reasoning steps, not for every call.</li>
+    <li><strong>Stuck on Claude Code auth?</strong> If you keep hitting OAuth 400 when logging in or out, just set <code>ANTHROPIC_API_KEY</code> directly as an env var. It's a supported auth method and takes precedence over OAuth. Don't lose a day to auth.</li>
+    <li><strong>Submissions:</strong> a 3-minute demo video, the open-source repo link, and a 100 to 200-word written summary.</li>
+  </ul>
+
+  <h2 id="unblock">The 30-minute <em>unblock</em> exercise</h2>
+  <p>If you're still stuck after reading all of the above:</p>
+
+  <ul>
+    <li><strong>10 minutes:</strong> write down 5 problems from your life, your family, your community, or the last job you held. Don't filter. Include the small ones.</li>
+    <li><strong>10 minutes:</strong> for each, ask "can someone solve this by just opening Claude?" If yes, cross it off.</li>
+    <li><strong>10 minutes:</strong> of the ones left, pick the one only you would know how to build for. That's your project.</li>
+  </ul>
+
+  <div class="pullquote">
+    You don't need to be <strong>clever</strong>. You need to be <strong>specific</strong>.
+  </div>
+
+  <h2>When to pivot <em>vs.</em> when to refine</h2>
+  <p>Most builders think "I don't have the right idea" when they actually have "I don't have the right framing."</p>
+
+  <p><strong>Refine</strong> if: you have a real problem but your build is too generic. Go back to the specific person you're building for and strip out everything that isn't for them.</p>
+
+  <p><strong>Pivot</strong> if: your problem is solvable without AI at all, your problem isn't actually yours (you picked it because it sounded smart), or you can't demo it in 3 minutes.</p>
+
+  <p>Most of you need to refine, not pivot.</p>
+
+  <h2>Key dates</h2>
+
+  <div class="dates">
+    <dl>
+      <dt>Building</dt>
+      <dd>Now through Sunday</dd>
+      <dt>Async judging</dt>
+      <dd>April 26 &amp; 27 (top 6 advance)</dd>
+      <dt>Live final</dt>
+      <dd>April 28, 12 PM EST</dd>
+      <dt>Winners announced</dt>
+      <dd>12:45 PM EST</dd>
+    </dl>
+  </div>
+
+  <h2>Engage. Ask questions. <em>Have fun.</em></h2>
+  <p>This hackathon is more than a competition. It's a week with hundreds of the most motivated builders on the platform. Use it.</p>
+
+  <ul>
+    <li><strong>Ask questions in #questions.</strong> Even ones you think are dumb. Someone else has the same one.</li>
+    <li><strong>Drop into #office-hours.</strong> The Claude Code team is literally in the room.</li>
+    <li><strong>Share your build-in-progress.</strong> Post a screenshot. Tag someone for feedback. The builders who share earliest get the best feedback loops.</li>
+    <li><strong>Help someone else.</strong> If you just solved a bug that stumped you for 2 hours, post the fix. Karma is real in this Discord.</li>
+    <li><strong>Pet photos welcome.</strong> Jason said so. Take it seriously.</li>
+  </ul>
+
+  <p>The people you meet this week end up on your GitHub stars list, in your DMs when you're job hunting, and shipping with you on the next hackathon. Friends &gt; prizes.</p>
+
+  <p>And have fun. If you're miserable, you're not going to ship your best work. Step away from the laptop. Go for a walk. Sleep. Come back with a fresh brain.</p>
+
+  <div class="closing">
+    <p>If you're feeling <em>clueless</em> right now, good. That's the feeling right before you lock in. The builders who end up on the podium felt exactly what you're feeling 36 hours before they shipped.</p>
+    <p>Go back to what only you would know how to build. Then build that.</p>
+    <p style="font-size: 22px; color: var(--muted);">See you in the Discord.</p>
+  </div>
+
+  <div class="signature">
+    <div class="sig-label">Written by</div>
+    <div class="sig-name">Tolani Omitokun</div>
+    <div class="sig-role">Community Mentor · Built with Opus 4.7 Hackathon</div>
+    <div class="sig-links">
+      <span><span class="ch">#</span>general</span>
+      <span><span class="ch">#</span>questions</span>
+      <span><span class="ch">#</span>office-hours</span>
+      <span>or DM me</span>
+    </div>
+  </div>
+
+</article>
+
+<footer>
+  <p>A community resource for <a href="https://built-with-opus-4-7.vercel.app/">Built with Opus 4.7</a></p>
+  <p>Made with care in Dallas, TX · April 2026</p>
+</footer>
+
+<script>
+  // Scroll progress bar
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const percent = (scrollTop / docHeight) * 100;
+    progress.style.width = percent + '%';
+  });
+</script>
+
+</body>
+</html>
