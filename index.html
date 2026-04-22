@@ -672,6 +672,41 @@
     color: var(--ember);
   }
 
+  /* Social icon links */
+  .sig-socials {
+    margin-top: 28px;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  .sig-socials a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--paper-deep);
+    border: 1px solid var(--border);
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.18s ease, transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+  }
+
+  .sig-socials a:hover {
+    color: var(--crimson);
+    border-color: var(--crimson);
+    background: #FFFFFF;
+    transform: translateY(-2px);
+  }
+
+  .sig-socials svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
+
   /* Footer */
   footer {
     background: var(--ink);
@@ -793,6 +828,11 @@
   </ul>
 
   <p>Domain expertise beats credentials. Start there.</p>
+
+  <div class="callout">
+    <div class="callout-label">Go deeper</div>
+    <p>Browse the <a href="https://cerebralvalley.ai/e/claude-code-hackathon/hackathon/gallery" target="_blank" rel="noopener noreferrer">last hackathon gallery</a> to see the full cohort in context — not just the winners. Look at how people framed their problem, what they chose to demo, and where they got specific. That's the level to match.</p>
+  </div>
 
   <h2 id="claude">Use Claude to <em>think</em>, not to pitch</h2>
   <p>Most people open Claude and ask, "give me a hackathon idea." That's how you get a generic idea. And a generic idea will not win this hackathon.</p>
@@ -981,14 +1021,14 @@ Do not give me a polished idea. Ask me clarifying questions first.</code></pre>
 
   <div class="dates">
     <dl>
-      <dt>Building</dt>
-      <dd>Now through Sunday</dd>
-      <dt>Async judging</dt>
-      <dd>April 26 &amp; 27 (top 6 advance)</dd>
-      <dt>Live final</dt>
-      <dd>April 28, 12 PM EST</dd>
-      <dt>Winners announced</dt>
-      <dd>12:45 PM EST</dd>
+      <dt>Kickoff</dt>
+      <dd>Tue Apr 21 · 12 PM EST</dd>
+      <dt>Submission deadline</dt>
+      <dd>Sun Apr 26 · 8 PM EST</dd>
+      <dt>Final judging</dt>
+      <dd>Tue Apr 28 · 12 PM EST</dd>
+      <dt>Closing ceremony</dt>
+      <dd>Tue Apr 28 · 12:45 PM EST</dd>
     </dl>
   </div>
 
@@ -1022,6 +1062,24 @@ Do not give me a polished idea. Ask me clarifying questions first.</code></pre>
       <span><span class="ch">#</span>questions</span>
       <span><span class="ch">#</span>office-hours</span>
       <span>or DM me</span>
+    </div>
+
+    <div class="sig-socials">
+      <a href="https://www.linkedin.com/in/tolaniomitokunproductmanager/" target="_blank" rel="noopener noreferrer" aria-label="Tolani on LinkedIn" title="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45C23.2 24 24 23.23 24 22.28V1.72C24 .77 23.2 0 22.23 0z"/>
+        </svg>
+      </a>
+      <a href="https://x.com/TolaniAI" target="_blank" rel="noopener noreferrer" aria-label="Tolani on X" title="X">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z"/>
+        </svg>
+      </a>
+      <a href="https://github.com/tolaniomitokun" target="_blank" rel="noopener noreferrer" aria-label="Tolani on GitHub" title="GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      </a>
     </div>
   </div>
 
