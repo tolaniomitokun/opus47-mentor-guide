@@ -4,7 +4,7 @@ A single-page guide for builders who hit the "wait, is this actually solving any
 
 **Live site:** https://tolaniomitokun.github.io/opus47-mentor-guide/
 
-Written by Tolani Omitokun, Community Mentor for the April 2026 cohort.
+Written by Tolani Omitokun, Claude Community Mentor for the April 2026 cohort.
 
 ---
 
